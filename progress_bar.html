@@ -1,0 +1,78 @@
+<style>
+    .progress_bar_container {
+        background-color: EBEBEB;
+        height: 20px;
+        width: 500px;
+        border-radius: 12px;
+        margin-bottom: 8px;
+    }
+    .progress {
+        border: 1px solid gray;
+        height: 18px;
+        width: 0%;
+        border-radius: 12px;
+        text-align: right;
+        padding-right: 4px;
+        color: #2b331d;
+        font-size: 16px;
+        transition: width 0.5s ease-in;
+        visibility: hidden;
+    }
+    .green {
+        background-color: #AEDC68;
+    }
+    .red {
+        background-color: #FF9183;
+    }
+    .white {
+        background-color: #fff;
+    }
+    .blue {
+        background-color: #92CFF8;
+    }
+    .orange {
+        background-color: #FDCF5B;
+    }
+</style>
+<div class="progress_bar_container">
+    <div class="progress green">
+    </div>
+</div>
+<div class="progress_bar_container">
+    <div class="progress red">
+    </div>
+</div>
+<div class="progress_bar_container">
+    <div class="progress white">
+    </div>
+</div>
+<div class="progress_bar_container">
+    <div class="progress blue">
+    </div>
+</div>
+<div class="progress_bar_container">
+    <div class="progress orange">
+    </div>
+</div>
+<button id="finish">Finish</button>
+<script>
+    function progress() {
+        let progress = 20
+        var progressInterval = setInterval(() => {
+            document.querySelectorAll('.progress').forEach(node => {
+                node.style.width = `${progress}%`;
+                node.style.visibility = 'visible';
+                node.innerHTML = `${progress}%`;
+            });
+            if (progress === 100) {
+                clearInterval(progressInterval)
+            } else {
+                progress += 20;
+            }
+        }, 1000)
+    }
+
+    document.getElementById("finish").addEventListener('click', () => {
+        progress()
+    })
+</script>
