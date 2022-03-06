@@ -1,0 +1,22 @@
+<input type="file" onchange="handleFileUpload(event)" />
+<audio id="test" controls />
+
+<script>
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        let startPointer = 0;
+        let endPointer = file.size;
+        let chunks = [];
+        cSize = 1024000;
+        while(startPointer < endPointer){
+            let newStartPointer = startPointer + cSize;
+            chunks.push(file.slice(startPointer, newStartPointer));
+            startPointer = newStartPointer;
+        }
+        console.log(chunks)
+        const blob = new Blob([...chunks], {type: 'audio/mpeg'})
+        document.getElementById('test').src = URL.createObjectURL(blob)
+        document.getElementById('test').play()
+    }
+
+</script>
